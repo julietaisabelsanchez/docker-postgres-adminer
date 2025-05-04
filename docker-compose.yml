@@ -1,24 +1,24 @@
-# Usar Usuario, Clave y Base de Datos con su propia información, por ejemplo:
-# POSTGRES_USER: gonzalezj       --->>> su apellido más la primera letra de su nombre
-# POSTGRES_PASSWORD: Jesus556    --->>> una clave que ud. elija
-# POSTGRES_DB: Prueba            --->>> la Base de Datos deberá tener el nombre de Prueba 
-
-version: '1.1'
-
-services:
-
+ services:
   db:
-    image: postgres
+    image: postgres:20
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: gonzalezj
-      POSTGRES_PASSWORD: Jesus556
-      POSTGRES_DB: Prueba
+      POSTGRES_USER: julietasanchez25
+      POSTGRES_PASSWORD: Julieta25
+      POSTGRES_DB: admin_25
+      volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   adminer:
     image: adminer
+    container_name: adminer-ui
     restart: always
-    ports:
+    depends_on:
+      - POSTGRES_DB
+    ports: 
       - 8080:8080
+
+volumes:
+ postgres_data:
